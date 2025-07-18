@@ -1,0 +1,66 @@
+DROP TABLE reconciliation.paytm_phonepe; 
+DROP TABLE reconciliation.payment_refund;
+DROP TABLE reconciliation.Recon_Outcome;
+DROP TABLE reconciliation.Recon_Summary;
+
+CREATE table reconciliation.PayTM_PhonePe (
+Txn_Source char(30), 
+Txn_Machine  char(10), 
+Txn_MID  char(80),
+Txn_Type char(40),  
+Txn_Date date, 
+Txn_RefNo char(60), 	
+Txn_Amount numeric
+);
+CREATE INDEX idx_txn_refno ON PayTM_PhonePe (Txn_RefNo);
+
+CREATE table reconciliation.Payment_Refund (
+Txn_Source char(30), 
+Txn_Machine  char(10), 
+Txn_MID  char(80), 
+Txn_Type char(40),  
+Txn_Date date, 
+Txn_RefNo char(60), 	
+Txn_Amount numeric
+);
+CREATE INDEX idx_txn_refno ON Payment_Refund (Txn_RefNo);
+
+CREATE table reconciliation.Recon_Outcome (
+Txn_RefNo CHAR(60), 
+Txn_Machine CHAR(10),
+Txn_MID CHAR(80),
+PTPP_Payment numeric,
+PTPP_Refund numeric,
+Cloud_Payment numeric,
+Cloud_Refund numeric,
+Cloud_MRefund numeric
+);
+CREATE INDEX idx_txn_refno ON Recon_Outcome (Txn_RefNo);
+
+CREATE table reconciliation.Recon_Summary (
+Txn_Source char(30), 
+Txn_Type char(40), 
+Txn_RefNo CHAR(60), 
+Txn_Machine CHAR(10),
+Txn_MID CHAR(80),
+Txn_Date date, 
+Cloud_Payment numeric,
+Cloud_Refund numeric,
+Cloud_MRefund numeric,
+Paytm_Payment numeric,
+Paytm_Refund numeric,
+Phonepe_Payment numeric,
+Phonepe_Refund numeric,
+VMSMoney_Payment numeric,
+VMSMoney_Refund numeric,
+Card_Payment numeric,
+Card_Refund numeric,
+Sodexo_Payment numeric,
+Sodexo_Refund numeric,
+HDFC_Payment numeric,
+HDFC_Refund numeric,
+CASH_Payment numeric
+);
+CREATE INDEX idx_txn_refno ON Recon_Summary (Txn_Refno);
+CREATE INDEX idx_txn_date ON Recon_Summary (Txn_Date);
+ALTER TABLE Recon_Summary ADD UNIQUE Recon_Summary_idx1 (Txn_RefNo, Txn_Type);
