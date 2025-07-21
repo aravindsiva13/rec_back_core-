@@ -1,0 +1,100 @@
+2025-07-19 10:45:42,000 - INFO - get_auth_plugin:149 - package: mysql.connector.plugins
+2025-07-19 10:45:42,001 - INFO - get_auth_plugin:150 - plugin_name: caching_sha2_password
+2025-07-19 10:45:42,002 - INFO - get_auth_plugin:154 - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
+2025-07-19 10:45:43,095 - INFO - _log:96 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.4.23.159:5000
+2025-07-19 10:45:43,097 - INFO - _log:96 - [33mPress CTRL+C to quit[0m
+2025-07-19 10:45:43,100 - INFO - _log:96 -  * Restarting with stat
+2025-07-19 10:45:45,334 - INFO - get_auth_plugin:149 - package: mysql.connector.plugins
+2025-07-19 10:45:45,334 - INFO - get_auth_plugin:150 - plugin_name: caching_sha2_password
+2025-07-19 10:45:45,335 - INFO - get_auth_plugin:154 - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
+2025-07-19 10:45:45,821 - WARNING - _log:96 -  * Debugger is active!
+2025-07-19 10:45:45,846 - INFO - _log:96 -  * Debugger PIN: 915-641-356
+2025-07-19 10:46:11,650 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:11] "GET /api/health HTTP/1.1" 200 -
+2025-07-19 10:46:13,732 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:14,271 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:14,630 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:14,637 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:14] "GET /api/reconciliation/summary-stats HTTP/1.1" 200 -
+2025-07-19 10:46:16,699 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:17,229 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:17,652 - INFO - execute_query_safe:1312 - Query returned 7 rows
+2025-07-19 10:46:17,658 - ERROR - get_payment_methods:1927 - Error getting payment methods: could not convert string to float: ''
+2025-07-19 10:46:17,659 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:17] "[35m[1mGET /api/reconciliation/payment-methods HTTP/1.1[0m" 500 -
+2025-07-19 10:46:19,720 - INFO - get_reconciliation_data:1647 - API request - filter: all, page: 0, limit: 100
+2025-07-19 10:46:19,722 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:20,225 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:20,350 - INFO - execute_query_safe:1312 - Query returned 100 rows
+2025-07-19 10:46:20,356 - INFO - get_reconciliation_data:1713 - Query successful for all: 100 records
+2025-07-19 10:46:20,357 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:20,801 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:20,816 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:20,826 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:20] "GET /api/reconciliation/data HTTP/1.1" 200 -
+2025-07-19 10:46:22,891 - INFO - get_reconciliation_data:1647 - API request - filter: success, page: 0, limit: 100
+2025-07-19 10:46:22,891 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:23,353 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:23,500 - INFO - execute_query_safe:1312 - Query returned 2 rows
+2025-07-19 10:46:23,505 - INFO - get_reconciliation_data:1713 - Query successful for success: 2 records
+2025-07-19 10:46:23,507 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:23] "GET /api/reconciliation/data?filter=success HTTP/1.1" 200 -
+2025-07-19 10:46:25,565 - INFO - get_reconciliation_data:1647 - API request - filter: investigate, page: 0, limit: 100
+2025-07-19 10:46:25,566 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:26,099 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:26,332 - INFO - execute_query_safe:1312 - Query returned 100 rows
+2025-07-19 10:46:26,338 - INFO - get_reconciliation_data:1713 - Query successful for investigate: 100 records
+2025-07-19 10:46:26,340 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:26,815 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:26,967 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:26,977 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:26] "GET /api/reconciliation/data?filter=investigate HTTP/1.1" 200 -
+2025-07-19 10:46:29,056 - INFO - get_reconciliation_data:1647 - API request - filter: statistics, page: 0, limit: 100
+2025-07-19 10:46:29,057 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:29,468 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:29,703 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:29,707 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:29] "GET /api/reconciliation/data?filter=statistics HTTP/1.1" 200 -
+2025-07-19 10:46:31,780 - INFO - get_reconciliation_data:1647 - API request - filter: payment_breakdown, page: 0, limit: 100
+2025-07-19 10:46:31,781 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:32,203 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:32,604 - INFO - execute_query_safe:1312 - Query returned 7 rows
+2025-07-19 10:46:32,608 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:32] "GET /api/reconciliation/data?filter=payment_breakdown HTTP/1.1" 200 -
+2025-07-19 10:46:35,696 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:35] "POST /api/refresh HTTP/1.1" 200 -
+2025-07-19 10:46:37,760 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:37] "GET /api/processing-status HTTP/1.1" 200 -
+2025-07-19 10:46:39,822 - INFO - get_reconciliation_data:1647 - API request - filter: all, page: 0, limit: 5
+2025-07-19 10:46:39,823 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:40,428 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:40,542 - INFO - execute_query_safe:1312 - Query returned 5 rows
+2025-07-19 10:46:40,548 - INFO - get_reconciliation_data:1713 - Query successful for all: 5 records
+2025-07-19 10:46:40,549 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:41,053 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:41,068 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:41,072 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:41] "GET /api/reconciliation/data?limit=5 HTTP/1.1" 200 -
+2025-07-19 10:46:43,128 - INFO - get_reconciliation_data:1647 - API request - filter: all, page: 0, limit: 100
+2025-07-19 10:46:43,129 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:43,502 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:43,511 - ERROR - execute_query_safe:1330 - Database error: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AND (
+                Txn_RefNo LIKE '%11V3E108002112006154486%' OR 
+           ' at line 20
+2025-07-19 10:46:43,517 - INFO - get_reconciliation_data:1713 - Query successful for all: 0 records
+2025-07-19 10:46:43,518 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:43] "GET /api/reconciliation/data?search=11V3E108002112006154486 HTTP/1.1" 200 -
+2025-07-19 10:46:45,570 - INFO - get_reconciliation_data:1647 - API request - filter: all, page: 0, limit: 1
+2025-07-19 10:46:45,570 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:46,053 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:46,180 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:46,184 - INFO - get_reconciliation_data:1713 - Query successful for all: 1 records
+2025-07-19 10:46:46,185 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:46,597 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:46,614 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:46,618 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:46] "GET /api/reconciliation/data?limit=1 HTTP/1.1" 200 -
+2025-07-19 10:46:48,670 - INFO - execute_query_safe:1304 - Connecting to database...
+2025-07-19 10:46:49,265 - INFO - execute_query_safe:1308 - Executing query...
+2025-07-19 10:46:49,279 - INFO - execute_query_safe:1312 - Query returned 1 rows
+2025-07-19 10:46:49,288 - INFO - _log:96 - 127.0.0.1 - - [19/Jul/2025 10:46:49] "GET /api/reconciliation/transaction/11V3E108002112006154486 HTTP/1.1" 200 -
+2025-07-19 10:56:15,720 - INFO - _log:96 -  * Detected change in 'C:\\Users\\IT\\Downloads\\Recon_Automation_LatestScripts\\app.py', reloading
+2025-07-19 10:56:16,070 - INFO - _log:96 -  * Restarting with stat
+2025-07-19 10:56:19,339 - INFO - get_auth_plugin:149 - package: mysql.connector.plugins
+2025-07-19 10:56:19,340 - INFO - get_auth_plugin:150 - plugin_name: caching_sha2_password
+2025-07-19 10:56:19,341 - INFO - get_auth_plugin:154 - AUTHENTICATION_PLUGIN_CLASS: MySQLCachingSHA2PasswordAuthPlugin
+2025-07-19 10:56:19,398 - WARNING - _log:96 -  * Debugger is active!
+2025-07-19 10:56:19,427 - INFO - _log:96 -  * Debugger PIN: 915-641-356
+2025-07-19 10:57:03,654 - INFO - _log:96 -  * Detected change in 'C:\\Users\\IT\\Downloads\\Recon_Automation_LatestScripts\\app.py', reloading
+2025-07-19 10:57:03,858 - INFO - _log:96 -  * Restarting with stat
+2025-07-19 10:57:17,393 - INFO - _log:96 -  * Restarting with stat

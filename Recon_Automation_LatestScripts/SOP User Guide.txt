@@ -1,0 +1,76 @@
+-----------------------------------------------------------------------------------------------------------------------------
+Steps for One-time Configuration:
+-----------------------------------------------------------------------------------------------------------------------------
+1. Create Following Directories & Sub Directories
+   a. C:\Users\IT\Downloads\Recon_Automation_LatestScripts (=> Referred as $HOME_DIR)
+   b. C:\Users\IT\Downloads\Recon_Automation_LatestScripts\Input_Files
+   c. C:\Users\IT\Downloads\Recon_Automation_LatestScripts\Output_Files
+
+   OR
+
+   Copy following files into $HOME_DIR and update $HOME_DIR in the list of Windows Power Scripts(*.ps1) and Python scripts (*.py) and also in all Batch (*.bat) files
+
+   SOP User Guide.txt
+   Create_Tables_n_Indexes.txt
+
+   1_Prepare_Input_Files.bat
+   2_PayTm_PhonePe_Recon.bat
+   3_LoadDB_ReconDailyExtract.bat
+
+   Prepare_Input_Files.ps1
+   Process_iCloud_Payment.ps1
+   Process_iCloud_Refund.ps1
+   Process_PayTm.ps1
+   Process_PhonePe.ps1
+
+   Generate_Recon_Output.py
+   load2table_iCloudPmtRef.py
+   load2table_PhonePePayTM.py
+   Update_Recon_Outcome.py
+
+
+2. Login into MySQL Workbench
+
+   alter user root identified by 'Templerun@2';
+   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Templerun@2';
+   FLUSH PRIVILEGES;
+
+   Create Local Instance with user ID as "root", password = "Templerun@2"
+
+   CREATE SCHEMA reconciliation;
+
+   Run the SQL commands from Create_Tables_n_Indexes.txt
+
+   Use the following parameters to connect to MySQL database OR update the parameters in all Python scripts (*.py) accordingly
+   host='localhost',          
+   user='root',               
+   password='Templerun@2',      
+   database='reconciliation'  
+
+3. Install Python and following Python Libraries (To be completed after trying it out in Bhavya's laptop)
+
+   pip install pandas
+   pip install openpyxl
+   pip install PyMySQL
+   pip install mysql-connector-python
+
+-----------------------------------------------------------------------------------------------------------------------------
+Steps for Daily Execution:
+-----------------------------------------------------------------------------------------------------------------------------
+
+1. Copy following input files into "C:\Users\IT\Downloads\Recon_Automation_LatestScripts\Input_Files"
+   a. iCloud Payment File(s) starting with pmt*.zip
+   b. iCloud Refund Files(s) starting with ref*.zip
+   c. PayTM Payment & Refund files ending with *bill_txn_report.xlsx
+   d. PhonePe Payment & Refund files starting with Merchant_Settlement_Report*.zip
+
+2. Invoke command prompt using: Windows + Command Prompt + Run as Administrator
+   Go to $HOME_DIR (C:\Users\IT\Downloads\Recon_Automation_LatestScripts)
+
+3. Run the following batch files one after another sequentially:
+   1_Prepare_Input_Files.bat (Estimated Run Time: 1-2 min) - Sequential Single script execution
+   2_PayTm_PhonePe_Recon.bat (Estimated Run Time: 30-90 mins depending upon size of input files) - Parallel 4 script execution
+   3_LoadDB_ReconDailyExtract.bat (Estimated Run Time: 2-3 min) - Sequential 4 scripts execution
+
+4. Check following Recon Output file generated successfully:
+   C:\Users\IT\Downloads\Recon_Automation_LatestScripts\recon_output.xlsx
