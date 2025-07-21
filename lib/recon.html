@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Reconciliation System - Technical Mindmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        .mindmap-container {
+            width: 100%;
+            min-width: 1400px;
+            min-height: 100vh;
+            position: relative;
+            padding: 40px;
+        }
+
+        .central-node {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 180px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            z-index: 10;
+            border: 4px solid #fff;
+        }
+
+        .central-node h1 {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .central-node p {
+            font-size: 12px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .branch {
+            position: absolute;
+            transform-origin: center;
+        }
+
+        .main-branch {
+            width: 200px;
+            height: 120px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .main-branch:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .main-branch h3 {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .main-branch p {
+            font-size: 10px;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        .sub-branch {
+            width: 140px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 9px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .sub-branch:hover {
+            transform: scale(1.1);
+        }
+
+        .connector {
+            position: absolute;
+            background: rgba(255,255,255,0.4);
+            transform-origin: left center;
+        }
+
+        .main-connector {
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .sub-connector {
+            height: 2px;
+            border-radius: 1px;
+        }
+
+        /* Color schemes for different branches */
+        .backend { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .frontend { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .database { background: linear-gradient(135deg, #fa709a, #fee140); }
+        .features { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+        .challenges { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+        .impact { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+
+        /* Positioning */
+        .branch-1 { top: 20%; left: 10%; }
+        .branch-2 { top: 20%; right: 10%; }
+        .branch-3 { top: 75%; left: 10%; }
+        .branch-4 { top: 75%; right: 10%; }
+        .branch-5 { top: 50%; left: 2%; }
+        .branch-6 { top: 50%; right: 2%; }
+
+        /* Sub-branches positioning */
+        .sub-1-1 { top: -20px; left: -160px; }
+        .sub-1-2 { top: 60px; left: -160px; }
+        .sub-2-1 { top: -20px; right: -160px; }
+        .sub-2-2 { top: 60px; right: -160px; }
+        .sub-3-1 { bottom: -20px; left: -160px; }
+        .sub-3-2 { bottom: 60px; left: -160px; }
+        .sub-4-1 { bottom: -20px; right: -160px; }
+        .sub-4-2 { bottom: 60px; right: -160px; }
+        .sub-5-1 { top: -100px; left: -160px; }
+        .sub-5-2 { bottom: -100px; left: -160px; }
+        .sub-6-1 { top: -100px; right: -160px; }
+        .sub-6-2 { bottom: -100px; right: -160px; }
+
+        /* Connectors positioning */
+        .conn-1 { top: calc(20% + 60px); left: calc(10% + 200px); width: calc(50% - 10% - 340px); }
+        .conn-2 { top: calc(20% + 60px); left: calc(50% + 140px); width: calc(90% - 50% - 340px); }
+        .conn-3 { top: calc(75% + 60px); left: calc(10% + 200px); width: calc(50% - 10% - 340px); }
+        .conn-4 { top: calc(75% + 60px); left: calc(50% + 140px); width: calc(90% - 50% - 340px); }
+        .conn-5 { top: calc(50% + 90px); left: calc(2% + 200px); width: calc(50% - 2% - 340px); }
+        .conn-6 { top: calc(50% + 90px); left: calc(50% + 140px); width: calc(98% - 50% - 340px); }
+
+        .stats-overlay {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            font-size: 12px;
+            min-width: 200px;
+        }
+
+        .stats-overlay h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            font-size: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 12px;
+            border-radius: 6px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 1400px) {
+            .mindmap-container {
+                min-width: 1200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mindmap-container">
+        <!-- Central Node -->
+        <div class="central-node">
+            <h1>Financial Reconciliation System</h1>
+            <p>Full-Stack Enterprise Solution<br>320-400 Development Hours</p>
+        </div>
+
+        <!-- Main Connectors -->
+        <div class="connector main-connector conn-1"></div>
+        <div class="connector main-connector conn-2"></div>
+        <div class="connector main-connector conn-3"></div>
+        <div class="connector main-connector conn-4"></div>
+        <div class="connector main-connector conn-5"></div>
+        <div class="connector main-connector conn-6"></div>
+
+        <!-- Branch 1: Backend Development -->
+        <div class="branch branch-1">
+            <div class="main-branch backend">
+                <h3>Backend Development</h3>
+                <p>Python Flask API<br>100-125 Hours</p>
+            </div>
+            
+            <div class="sub-branch backend sub-1-1">
+                <strong>Database Integration</strong><br>
+                • Complex SQL Queries<br>
+                • 5 Data Views<br>
+                • MySQL Optimization<br>
+                • 20-25 Hours
+            </div>
+            
+            <div class="sub-branch backend sub-1-2">
+                <strong>File Processing</strong><br>
+                • Multi-format Support<br>
+                • Batch Orchestration<br>
+                • Async Processing<br>
+                • 25-30 Hours
+            </div>
+        </div>
+
+        <!-- Branch 2: Frontend Development -->
+        <div class="branch branch-2">
+            <div class="main-branch frontend">
+                <h3>Frontend Development</h3>
+                <p>Flutter Mobile App<br>155-190 Hours</p>
+            </div>
+            
+            <div class="sub-branch frontend sub-2-1">
+                <strong>State Management</strong><br>
+                • 6 Provider Classes<br>
+                • Real-time Updates<br>
+                • Data Synchronization<br>
+                • 30-35 Hours
+            </div>
+            
+            <div class="sub-branch frontend sub-2-2">
+                <strong>Advanced UI</strong><br>
+                • Data Tables<br>
+                • Charts & Analytics<br>
+                • Multi-screen Navigation<br>
+                • 40-50 Hours
+            </div>
+        </div>
+
+        <!-- Branch 3: Database Architecture -->
+        <div class="branch branch-3">
+            <div class="main-branch database">
+                <h3>Database Architecture</h3>
+                <p>MySQL Enterprise Schema<br>15-20 Hours</p>
+            </div>
+            
+            <div class="sub-branch database sub-3-1">
+                <strong>Complex Queries</strong><br>
+                • Union Operations<br>
+                • Conditional Logic<br>
+                • Performance Tuning<br>
+                • High Complexity
+            </div>
+            
+            <div class="sub-branch database sub-3-2">
+                <strong>Data Models</strong><br>
+                • 3 Core Tables<br>
+                • Relationships<br>
+                • Indexing Strategy<br>
+                • Optimized Design
+            </div>
+        </div>
+
+        <!-- Branch 4: Key Features -->
+        <div class="branch branch-4">
+            <div class="main-branch features">
+                <h3>Core Features</h3>
+                <p>Enterprise Capabilities<br>Advanced Functionality</p>
+            </div>
+            
+            <div class="sub-branch features sub-4-1">
+                <strong>Automation Pipeline</strong><br>
+                • 3-Stage Processing<br>
+                • Real-time Monitoring<br>
+                • Error Recovery<br>
+                • Status Tracking
+            </div>
+            
+            <div class="sub-branch features sub-4-2">
+                <strong>Analytics Dashboard</strong><br>
+                • 5 Data Views<br>
+                • Interactive Charts<br>
+                • Advanced Filtering<br>
+                • Export Functions
+            </div>
+        </div>
+
+        <!-- Branch 5: Technical Challenges -->
+        <div class="branch branch-5">
+            <div class="main-branch challenges">
+                <h3>Technical Challenges</h3>
+                <p>Complex Problem Solving<br>Innovation Required</p>
+            </div>
+            
+            <div class="sub-branch challenges sub-5-1">
+                <strong>Data Harmonization</strong><br>
+                • Multi-platform Integration<br>
+                • Format Normalization<br>
+                • Intelligent Matching<br>
+                • Cross-validation Logic
+            </div>
+            
+            <div class="sub-branch challenges sub-5-2">
+                <strong>Performance Optimization</strong><br>
+                • Large Dataset Handling<br>
+                • Async Processing<br>
+                • Memory Management<br>
+                • UI Responsiveness
+            </div>
+        </div>
+
+        <!-- Branch 6: Business Impact -->
+        <div class="branch branch-6">
+            <div class="main-branch impact">
+                <h3>Business Impact</h3>
+                <p>Measurable ROI<br>Process Transformation</p>
+            </div>
+            
+            <div class="sub-branch impact sub-6-1">
+                <strong>Efficiency Gains</strong><br>
+                • 95% Time Reduction<br>
+                • 4-6 hrs → 10-15 mins<br>
+                • Automated Processing<br>
+                • Error Elimination
+            </div>
+            
+            <div class="sub-branch impact sub-6-2">
+                <strong>Quality Improvement</strong><br>
+                • 90%+ Accuracy Increase<br>
+                • Real-time Insights<br>
+                • Mobile Accessibility<br>
+                • Scalable Architecture
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Overlay -->
+    <div class="stats-overlay">
+        <h4>📊 Development Metrics</h4>
+        <div class="stat-item">
+            <span>Total Hours:</span>
+            <strong>320-400</strong>
+        </div>
+        <div class="stat-item">
+            <span>Backend API:</span>
+            <strong>8 Endpoints</strong>
+        </div>
+        <div class="stat-item">
+            <span>Frontend Screens:</span>
+            <strong>3 Major</strong>
+        </div>
+        <div class="stat-item">
+            <span>Data Views:</span>
+            <strong>5 Different</strong>
+        </div>
+        <div class="stat-item">
+            <span>State Providers:</span>
+            <strong>6 Classes</strong>
+        </div>
+        <div class="stat-item">
+            <span>Processing Stages:</span>
+            <strong>3 Automated</strong>
+        </div>
+        <div class="stat-item">
+            <span>File Formats:</span>
+            <strong>ZIP, Excel</strong>
+        </div>
+        <div class="stat-item">
+            <span>Platforms:</span>
+            <strong>PayTM, PhonePe</strong>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <h4>🎨 Component Legend</h4>
+        <div class="legend-item">
+            <div class="legend-color backend"></div>
+            <span>Backend Development</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color frontend"></div>
+            <span>Frontend Development</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color database"></div>
+            <span>Database Architecture</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color features"></div>
+            <span>Core Features</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color challenges"></div>
+            <span>Technical Challenges</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color impact"></div>
+            <span>Business Impact</span>
+        </div>
+    </div>
+
+    <script>
+        // Add interactive hover effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const branches = document.querySelectorAll('.main-branch');
+            
+            branches.forEach(branch => {
+                branch.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05) rotate(2deg)';
+                });
+                
+                branch.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1) rotate(0deg)';
+                });
+                
+                branch.addEventListener('click', function() {
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.05)';
+                    }, 100);
+                });
+            });
+
+            // Add floating animation to central node
+            const centralNode = document.querySelector('.central-node');
+            let angle = 0;
+            
+            setInterval(() => {
+                angle += 0.5;
+                const yOffset = Math.sin(angle * Math.PI / 180) * 3;
+                centralNode.style.transform = `translate(-50%, calc(-50% + ${yOffset}px))`;
+            }, 50);
+
+            // Add connecting line pulse effect
+            const connectors = document.querySelectorAll('.connector');
+            connectors.forEach((connector, index) => {
+                setTimeout(() => {
+                    connector.style.animation = 'pulse 2s ease-in-out infinite';
+                }, index * 200);
+            });
+        });
+
+        // Add CSS for pulse animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0%, 100% { opacity: 0.4; transform: scaleY(1); }
+                50% { opacity: 0.8; transform: scaleY(1.2); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add zoom functionality
+        let scale = 1;
+        const container = document.querySelector('.mindmap-container');
+        
+        document.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                scale *= delta;
+                scale = Math.min(Math.max(scale, 0.5), 2);
+                container.style.transform = `scale(${scale})`;
+                container.style.transformOrigin = 'center center';
+            }
+        });
+
+        // Add keyboard shortcuts info
+        console.log('💡 Mindmap Controls:');
+        console.log('   • Ctrl + Scroll: Zoom in/out');
+        console.log('   • Click branches: Interactive effects');
+        console.log('   • Hover: Enhanced animations');
+    </script>
+</body>
+</html>
